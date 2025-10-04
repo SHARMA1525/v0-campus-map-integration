@@ -1,0 +1,511 @@
+export type Persona = "faculty" | "new-student" | "cat-lover" | "cat-fearful"
+
+export interface Location {
+  name: string
+  lat: number
+  lng: number
+  description: string
+  landmarks?: string
+  type: "warning" | "romantic" | "food" | "study" | "sports" | "default" | "medical" | "hostel" | "inclusive"
+  icon: string
+  tags: string[]
+}
+
+export interface Route {
+  start: string
+  end: string
+  persona: Persona
+  path: [number, number][]
+  directions: string[]
+}
+
+export const campusData = {
+  locations: [
+    {
+      name: "Snakes Area",
+      lat: 18.621630576268346,
+      lng: 73.91029588382592,
+      description: "Watch out! Snakes often appear here at night. Stay alert and use caution.",
+      landmarks: "Near the old banyan tree, behind the maintenance shed",
+      type: "warning" as const,
+      icon: "🐍",
+      tags: ["snakes", "danger", "warning", "caution", "night", "wildlife", "avoid"],
+    },
+    {
+      name: "Makeout Spot",
+      lat: 18.623191167153195,
+      lng: 73.91106428212562,
+      description: "Popular hangout for couples. Quiet and secluded area with benches.",
+      landmarks: "Behind the library, near the garden",
+      type: "romantic" as const,
+      icon: "💕",
+      tags: ["romantic", "couples", "date", "hangout", "quiet", "secluded", "privacy", "love", "dating"],
+    },
+    {
+      name: "Foodie Zone",
+      lat: 18.620619447694995,
+      lng: 73.91295464136682,
+      description: "Most frequented place to eat. Great variety of food stalls and canteen.",
+      landmarks: "Main canteen building, center of campus",
+      type: "food" as const,
+      icon: "🍕",
+      tags: ["food", "eat", "snack", "lunch", "dinner", "breakfast", "canteen", "restaurant", "hungry", "meal"],
+    },
+    {
+      name: "Library",
+      lat: 18.621355009686077,
+      lng: 73.91216071060447,
+      description: "Best spot to find peace (if you can escape the crowd). Quiet study areas available.",
+      landmarks: "Three-story building with red roof, near admin block",
+      type: "study" as const,
+      icon: "📚",
+      tags: ["study", "quiet", "books", "reading", "library", "peace", "focus", "exam", "research", "silent"],
+    },
+    {
+      name: "Sports Ground",
+      lat: 18.622226739021418,
+      lng: 73.91070488671683,
+      description: "Where students play and sometimes get lost. Large open field for various sports.",
+      landmarks: "Behind the main building, near the parking lot",
+      type: "sports" as const,
+      icon: "⚽",
+      tags: ["sports", "play", "exercise", "field", "football", "cricket", "outdoor", "game", "fitness"],
+    },
+    {
+      name: "Main Entrance",
+      lat: 18.61979130306694,
+      lng: 73.91229119154305,
+      description: "Main campus entrance with security gate.",
+      landmarks: "Front gate with college name board",
+      type: "default" as const,
+      icon: "🚪",
+      tags: ["entrance", "gate", "entry", "main", "front", "security", "start"],
+    },
+    {
+      name: "Parking Lot",
+      lat: 18.622820241398035,
+      lng: 73.9123705911887,
+      description: "Student and faculty parking area.",
+      landmarks: "North side of campus, near sports ground",
+      type: "default" as const,
+      icon: "🅿️",
+      tags: ["parking", "car", "vehicle", "bike", "motorcycle", "park"],
+    },
+    {
+      name: "ADYPU Pond",
+      lat: 18.62178529423787,
+      lng: 73.90965497062446,
+      description: "Serene pond area perfect for relaxation and nature watching.",
+      landmarks: "West side of campus, near the green belt",
+      type: "default" as const,
+      icon: "🌊",
+      tags: ["pond", "water", "nature", "relax", "peaceful", "scenic", "calm", "meditation"],
+    },
+    {
+      name: "Cuddling Spot",
+      lat: 18.62003386097044,
+      lng: 73.91128467233808,
+      description: "Cozy corner for couples. Private and peaceful.",
+      landmarks: "Near the south garden, behind the trees",
+      type: "romantic" as const,
+      icon: "🫂",
+      tags: ["romantic", "couples", "cuddle", "private", "cozy", "intimate", "date", "love"],
+    },
+    {
+      name: "Asli Romantic Spot",
+      lat: 18.618782612017323,
+      lng: 73.91325685306099,
+      description: "The real deal for romance. Most secluded spot on campus.",
+      landmarks: "Far corner of campus, near the boundary wall",
+      type: "romantic" as const,
+      icon: "💖",
+      tags: ["romantic", "couples", "secluded", "private", "date", "love", "intimate", "real", "best"],
+    },
+    {
+      name: "Newton Ka Baccha",
+      lat: 18.62131227017407,
+      lng: 73.91268611056462,
+      description: "Physics lab and science block. Where gravity and grades both pull you down.",
+      landmarks: "Science building, near the main academic block",
+      type: "study" as const,
+      icon: "🍎",
+      tags: ["physics", "science", "lab", "study", "academic", "class", "newton", "experiment"],
+    },
+    {
+      name: "Not Real Doctors",
+      lat: 18.62050024323258,
+      lng: 73.91098414865027,
+      description: "Medical and nursing department. Future doctors in training!",
+      landmarks: "Medical block, white building with red cross",
+      type: "medical" as const,
+      icon: "🩺",
+      tags: ["medical", "doctor", "nursing", "health", "clinic", "medicine", "hospital", "treatment"],
+    },
+    {
+      name: "Pampers Point",
+      lat: 18.620974408665283,
+      lng: 73.90989123735534,
+      description: "Restroom and washroom facilities. Essential pit stop!",
+      landmarks: "Near the main building, ground floor",
+      type: "default" as const,
+      icon: "🚻",
+      tags: ["restroom", "washroom", "toilet", "bathroom", "facilities", "loo"],
+    },
+    {
+      name: "Couple Canteen",
+      lat: 18.620105745388212,
+      lng: 73.9129773321464,
+      description: "Romantic dining spot. Where love and lunch meet.",
+      landmarks: "Small canteen near the south entrance",
+      type: "romantic" as const,
+      icon: "🍽️",
+      tags: ["food", "eat", "romantic", "couples", "date", "canteen", "dining", "lunch", "dinner"],
+    },
+    {
+      name: "Unknown",
+      lat: 18.62118477876397,
+      lng: 73.91127988657033,
+      description: "Mystery location. Nobody knows what happens here.",
+      landmarks: "Somewhere in the middle of campus... maybe?",
+      type: "default" as const,
+      icon: "❓",
+      tags: ["mystery", "unknown", "secret", "hidden", "explore"],
+    },
+    {
+      name: "Rajastani Pool",
+      lat: 18.62252640778753,
+      lng: 73.91172662880909,
+      description: "Swimming pool area. Dive in and cool off!",
+      landmarks: "North side, near the sports complex",
+      type: "sports" as const,
+      icon: "🏊",
+      tags: ["pool", "swimming", "swim", "water", "sports", "cool", "dive", "exercise"],
+    },
+    {
+      name: "Look But Dont Play Court",
+      lat: 18.621879215116827,
+      lng: 73.91198452548853,
+      description: "Reserved sports court. Look all you want, but playing requires permission!",
+      landmarks: "Between library and sports ground",
+      type: "sports" as const,
+      icon: "🏀",
+      tags: ["basketball", "court", "sports", "reserved", "game"],
+    },
+    {
+      name: "Snakes Hostel",
+      lat: 18.620407299533884,
+      lng: 73.91274430438051,
+      description: "Student hostel. Watch out for snakes nearby!",
+      landmarks: "South side of campus, residential area",
+      type: "hostel" as const,
+      icon: "🏠",
+      tags: ["hostel", "residence", "dorm", "accommodation", "stay", "room", "sleep"],
+    },
+    {
+      name: "Gentle Mens Zone",
+      lat: 18.62037582709292,
+      lng: 73.91217971960793,
+      description: "Men's common area and facilities.",
+      landmarks: "Near the hostel area",
+      type: "default" as const,
+      icon: "🚹",
+      tags: ["men", "male", "boys", "common", "area", "facilities"],
+    },
+    {
+      name: "LGBTQ+ 🏳️‍🌈",
+      lat: 18.621172813763035,
+      lng: 73.91229987963585,
+      description: "Inclusive safe space for LGBTQ+ students. Everyone is welcome!",
+      landmarks: "Near the student center, rainbow flag outside",
+      type: "inclusive" as const,
+      icon: "🏳️‍🌈",
+      tags: ["lgbtq", "inclusive", "safe", "pride", "rainbow", "community", "support", "welcoming"],
+    },
+  ],
+  routes: [
+    // Routes to Foodie Zone
+    {
+      start: "Main Entrance",
+      end: "Foodie Zone",
+      persona: "faculty" as const,
+      path: [
+        [18.61979130306694, 73.91229119154305],
+        [18.620619447694995, 73.91295464136682],
+      ],
+      directions: ["Enter through main gate", "Walk straight to the canteen area"],
+    },
+    {
+      start: "Main Entrance",
+      end: "Foodie Zone",
+      persona: "new-student" as const,
+      path: [
+        [18.61979130306694, 73.91229119154305],
+        [18.6202, 73.9126],
+        [18.620619447694995, 73.91295464136682],
+      ],
+      directions: [
+        "Enter through main gate and look for the big college sign",
+        "Turn right and follow the crowd (everyone goes to eat!)",
+        "You'll see the canteen - it's the building with lots of students!",
+      ],
+    },
+    {
+      start: "Main Entrance",
+      end: "Foodie Zone",
+      persona: "cat-lover" as const,
+      path: [
+        [18.61979130306694, 73.91229119154305],
+        [18.6203, 73.9127],
+        [18.620619447694995, 73.91295464136682],
+      ],
+      directions: ["Enter main gate", "Take the path through the garden", "Canteen is ahead"],
+    },
+    {
+      start: "Main Entrance",
+      end: "Foodie Zone",
+      persona: "cat-fearful" as const,
+      path: [
+        [18.61979130306694, 73.91229119154305],
+        [18.6204, 73.9126],
+        [18.620619447694995, 73.91295464136682],
+      ],
+      directions: ["Enter main gate", "Take the main paved path", "Approach canteen from the front entrance"],
+    },
+    // Routes to Library
+    {
+      start: "Foodie Zone",
+      end: "Library",
+      persona: "faculty" as const,
+      path: [
+        [18.620619447694995, 73.91295464136682],
+        [18.621355009686077, 73.91216071060447],
+      ],
+      directions: ["Exit canteen", "Walk towards the library building"],
+    },
+    {
+      start: "Foodie Zone",
+      end: "Library",
+      persona: "new-student" as const,
+      path: [
+        [18.620619447694995, 73.91295464136682],
+        [18.6209, 73.9126],
+        [18.621355009686077, 73.91216071060447],
+      ],
+      directions: [
+        "Come out of the canteen main door",
+        "Look for the three-story building with red roof",
+        "Enter through the main door - you'll see the librarian's desk",
+      ],
+    },
+    {
+      start: "Foodie Zone",
+      end: "Library",
+      persona: "cat-lover" as const,
+      path: [
+        [18.620619447694995, 73.91295464136682],
+        [18.621, 73.9125],
+        [18.621355009686077, 73.91216071060447],
+      ],
+      directions: ["Exit canteen", "Take the garden path", "Library is just ahead"],
+    },
+    {
+      start: "Foodie Zone",
+      end: "Library",
+      persona: "cat-fearful" as const,
+      path: [
+        [18.620619447694995, 73.91295464136682],
+        [18.6211, 73.9124],
+        [18.621355009686077, 73.91216071060447],
+      ],
+      directions: ["Exit canteen from front door", "Take the main paved path", "Library entrance ahead"],
+    },
+    // Routes to Makeout Spot
+    {
+      start: "Library",
+      end: "Makeout Spot",
+      persona: "faculty" as const,
+      path: [
+        [18.621355009686077, 73.91216071060447],
+        [18.622230576268346, 73.91159588382592],
+        [18.623191167153195, 73.91106428212562],
+      ],
+      directions: ["Exit library from back door", "Walk through the garden", "Secluded area with benches ahead"],
+    },
+    {
+      start: "Library",
+      end: "Makeout Spot",
+      persona: "new-student" as const,
+      path: [
+        [18.621355009686077, 73.91216071060447],
+        [18.621830576268346, 73.91179588382592],
+        [18.622530576268346, 73.91139588382592],
+        [18.623191167153195, 73.91106428212562],
+      ],
+      directions: [
+        "Go to the back of the library building",
+        "You'll see a small garden with flowers",
+        "Walk through the garden path",
+        "Look for the benches under the trees - that's the spot!",
+      ],
+    },
+    {
+      start: "Library",
+      end: "Makeout Spot",
+      persona: "cat-lover" as const,
+      path: [
+        [18.621355009686077, 73.91216071060447],
+        [18.622030576268346, 73.91169588382592],
+        [18.622630576268346, 73.91129588382592],
+        [18.623191167153195, 73.91106428212562],
+      ],
+      directions: [
+        "Exit library back door",
+        "Walk through the garden (cats love this area)",
+        "Follow the stone path",
+        "Destination ahead",
+      ],
+    },
+    {
+      start: "Library",
+      end: "Makeout Spot",
+      persona: "cat-fearful" as const,
+      path: [
+        [18.621355009686077, 73.91216071060447],
+        [18.621930576268346, 73.91189588382592],
+        [18.622530576268346, 73.91149588382592],
+        [18.623191167153195, 73.91106428212562],
+      ],
+      directions: ["Exit library side door", "Take the paved walkway", "Avoid the garden center", "Benches area ahead"],
+    },
+    // Routes to Sports Ground
+    {
+      start: "Foodie Zone",
+      end: "Sports Ground",
+      persona: "faculty" as const,
+      path: [
+        [18.620619447694995, 73.91295464136682],
+        [18.621730576268346, 73.91129588382592],
+        [18.622226739021418, 73.91070488671683],
+      ],
+      directions: ["Exit canteen", "Walk towards parking lot", "Sports ground is on the right"],
+    },
+    {
+      start: "Foodie Zone",
+      end: "Sports Ground",
+      persona: "new-student" as const,
+      path: [
+        [18.620619447694995, 73.91295464136682],
+        [18.621530576268346, 73.91149588382592],
+        [18.621930576268346, 73.91109588382592],
+        [18.622226739021418, 73.91070488671683],
+      ],
+      directions: [
+        "Come out of canteen",
+        "Look for the large open field (you'll hear students playing)",
+        "Walk towards the parking lot area",
+        "The big green field is the sports ground!",
+      ],
+    },
+    {
+      start: "Foodie Zone",
+      end: "Sports Ground",
+      persona: "cat-lover" as const,
+      path: [
+        [18.620619447694995, 73.91295464136682],
+        [18.621430576268346, 73.91139588382592],
+        [18.621830576268346, 73.91099588382592],
+        [18.622226739021418, 73.91070488671683],
+      ],
+      directions: [
+        "Exit canteen",
+        "Take the scenic route along the trees",
+        "Cats sometimes rest in the shade here",
+        "Sports ground ahead",
+      ],
+    },
+    {
+      start: "Foodie Zone",
+      end: "Sports Ground",
+      persona: "cat-fearful" as const,
+      path: [
+        [18.620619447694995, 73.91295464136682],
+        [18.621630576268346, 73.91129588382592],
+        [18.621930576268346, 73.91089588382592],
+        [18.622226739021418, 73.91070488671683],
+      ],
+      directions: [
+        "Exit canteen front door",
+        "Take the main road (well-lit and open)",
+        "Walk straight towards parking",
+        "Sports ground on your right",
+      ],
+    },
+    // Routes to Snakes Area
+    {
+      start: "Sports Ground",
+      end: "Snakes Area",
+      persona: "faculty" as const,
+      path: [
+        [18.622226739021418, 73.91070488671683],
+        [18.621830576268346, 73.91049588382592],
+        [18.621630576268346, 73.91029588382592],
+      ],
+      directions: [
+        "From sports ground, head north",
+        "Walk past the maintenance area",
+        "Snakes area near old banyan tree - be careful!",
+      ],
+    },
+    {
+      start: "Sports Ground",
+      end: "Snakes Area",
+      persona: "new-student" as const,
+      path: [
+        [18.622226739021418, 73.91070488671683],
+        [18.622030576268346, 73.91059588382592],
+        [18.621830576268346, 73.91039588382592],
+        [18.621630576268346, 73.91029588382592],
+      ],
+      directions: [
+        "From the sports ground, look for the old section of campus",
+        "Walk towards the big banyan tree (you can't miss it)",
+        "Pass by the maintenance shed (gray building)",
+        "This is the snakes area - watch your step, especially at night!",
+      ],
+    },
+    {
+      start: "Sports Ground",
+      end: "Snakes Area",
+      persona: "cat-lover" as const,
+      path: [
+        [18.622226739021418, 73.91070488671683],
+        [18.621930576268346, 73.91049588382592],
+        [18.621730576268346, 73.91039588382592],
+        [18.621630576268346, 73.91029588382592],
+      ],
+      directions: [
+        "Head north from sports ground",
+        "Take the nature trail",
+        "Cats rarely come here (they know better!)",
+        "Snakes area ahead - stay alert",
+      ],
+    },
+    {
+      start: "Sports Ground",
+      end: "Snakes Area",
+      persona: "cat-fearful" as const,
+      path: [
+        [18.622226739021418, 73.91070488671683],
+        [18.622030576268346, 73.91049588382592],
+        [18.621830576268346, 73.91039588382592],
+        [18.621630576268346, 73.91029588382592],
+      ],
+      directions: [
+        "From sports ground, take the outer path",
+        "Stay on the paved road",
+        "Walk towards the old campus section",
+        "Snakes area near banyan tree",
+      ],
+    },
+  ],
+}
